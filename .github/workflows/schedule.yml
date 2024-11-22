@@ -3,7 +3,7 @@ name: Update Productive Time
 on:
   push:
     branches:
-      - master
+      - main
       
   schedule:
     - cron: "*/5 * * * *" # 매 5분마다 실행
