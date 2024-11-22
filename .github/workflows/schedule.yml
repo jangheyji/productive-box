@@ -12,19 +12,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20' # Node.js 최신 안정화 버전 사용
-          
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Generate Productive Box
-        uses: techinpark/productive-box@latest
+        uses: jangheyji/productive-box@main # 포크된 레포지토리와 브랜치 사용
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          TIMEZONE: Asia/Seoul # 한국 시간대
+          TIMEZONE: Asia/Seoul
           OUTPUT_PATH: profile-summary-card-output/dracula/4-productive-time.svg
 
       - name: Verify output
