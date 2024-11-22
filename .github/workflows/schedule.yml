@@ -12,11 +12,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Node.js 최신 안정화 버전 사용
+          
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Generate Productive Box
-        uses: jangheyji/productive-box@main
+        uses: techinpark/productive-box@latest
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           TIMEZONE: Asia/Seoul # 한국 시간대
