@@ -17,3 +17,16 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           TIMEZONE: Asia/Seoul # 한국 시간대
           OUTPUT_PATH: profile-summary-card-output/dracula/4-productive-time.svg
+
+      - name: Verify output
+        run: |
+          echo "Checking output files..."
+          ls -R profile-summary-card-output/
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Update Productive Time SVG"
+          git push
