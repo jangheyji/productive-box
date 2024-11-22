@@ -1,17 +1,19 @@
-name: Update gist
+name: Update Productive Time
+
 on:
-  push:
-    branches:
-      - master
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 * * *" # 매일 실행 (UTC 기준)
+
 jobs:
-  update-gist:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Update gist
-        uses: maxam2017/productive-box@master
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Generate Productive Box
+        uses: yingyeothon/productive-box@latest
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GIST_ID: ${{ secrets.GIST_ID }}
-          TIMEZONE: Asia/Seoul
+          TIMEZONE: Asia/Seoul # 한국 시간대
+          OUTPUT_PATH: profile-summary-card-output/dracula/4-productive-time.svg
