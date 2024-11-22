@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate Productive Box
-        uses: yingyeothon/productive-box@latest
+        uses: techinpark/productive-box@latest
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           TIMEZONE: Asia/Seoul # 한국 시간대
