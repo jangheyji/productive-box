@@ -4,33 +4,20 @@ on:
   push:
     branches:
       - main
-      
+
   schedule:
-    - cron: "*/5 * * * *" # 매 5분마다 실행
+    - cron: "0 0 * * *" # 매일 자정 실행 (UTC 기준)
 
 jobs:
-  build:
+  update-gist:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Generate Productive Box
-        uses: jangheyji/productive-box@main # 포크된 레포지토리와 브랜치 사용
+      - name: Update gist
+        uses: maxam2017/productive-box@master
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          TIMEZONE: Asia/Seoul
-          OUTPUT_PATH: profile-summary-card-output/dracula/4-productive-time.svg
-
-      - name: Verify output
-        run: |
-          echo "Checking output files..."
-          ls -R profile-summary-card-output/
-
-      - name: Commit and Push changes
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add .
-          git commit -m "Update Productive Time SVG"
-          git push
+          GH_TOKEN: ${{ secrets.GH_TOKEN }} # GitHub Personal Access Token
+          GIST_ID: ${{ secrets.GIST_ID }}   # Gist ID
+          TIMEZONE: Asia/Seoul              # 한국 시간대
